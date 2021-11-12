@@ -1,14 +1,33 @@
 <template>
-  <TheHeader />
-  <RouterView />
+  <div class="app__inner">
+    <LNB />
+    <div class="app__page">
+    </div>
+  </div>
 </template>
 
 <script>
-import TheHeader from '~/components/TheHeader'
+import LNB from '~/components/LNB'
 
 export default {
   components: {
-    TheHeader
+    LNB
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.app__inner {
+  display: flex;
+
+  height: 100vh;
+
+  .app__page {
+    flex-grow: 1;
+
+    box-sizing: border-box;
+    border: 4px solid red;
+    height: 100%;
+  }
+}
+</style>
