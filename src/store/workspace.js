@@ -18,8 +18,16 @@ export default {
 
   actions: {
     // List
-    readWorkspaces() {
+    async readWorkspaces({ commit }) {
+      const workspaces = await request({
+        method: 'GET'
+      })
 
+      commit('assignState', {
+        workspaces
+      })
+
+      console.log(workspaces)
     },
 
     // Item

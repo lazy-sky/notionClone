@@ -5,7 +5,8 @@
 <script>
 export default {
   created () {
-    this.$store.dispatch('workspace/createWorkspace')
+    // this.$store.dispatch('workspace/createWorkspace')
+    this.$store.dispatch('workspace/readWorkspaces')
   }
 }
 </script>
