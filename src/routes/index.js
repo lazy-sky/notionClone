@@ -9,11 +9,13 @@ export default createRouter({
     {
       path: '/',
       component: Workspace,
-      children: {
-        name: 'Workspace',
-        path: 'workspaces/:id',
-        component: Workspace
-      }
+      children: [
+        {
+          name: 'Workspace',
+          path: 'workspaces/:id',
+          component: Workspace
+        }
+      ]
     },
     {
       path: '/about',

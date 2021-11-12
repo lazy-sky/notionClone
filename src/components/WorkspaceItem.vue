@@ -27,6 +27,13 @@
         </span>
       </div>
     </div>
+    <ul v-if="hasChildren">
+      <WorkspaceItem
+        v-for="ws in workspace.children"
+        :key="ws.id"
+        :workspace="ws"
+        style="color: red;" />
+    </ul>
   </li>
 </template>
 
@@ -39,9 +46,15 @@ export default {
     }
   },
 
+  computed: {
+    hasChildren() {
+      return this.workspace.children && this.workspace.children.length
+    }
+  },
+
   methods: {
-    async createWorkspace() {
-      const a = await this.$store.dispatch('workspace/createWorkspace', {
+    createWorkspace() {
+      this.$store.dispatch('workspace/createWorkspace', {
         parentId: this.workspace.id
       })
     },
