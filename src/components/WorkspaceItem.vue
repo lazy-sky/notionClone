@@ -15,10 +15,14 @@
         {{ workspace.title || '제목 없음' }}
       </span>
       <div class="actions">
-        <span class="material-icons">
+        <span
+          class="material-icons"
+          @click.stop="createWorkspace">
           add
         </span>
-        <span class="material-icons">
+        <span
+          class="material-icons"
+          @click.stop="deleteWorkspace">
           delete
         </span>
       </div>
@@ -32,6 +36,18 @@ export default {
     workspace: {
       type: Object,
       default: () => ({})
+    }
+  },
+
+  methods: {
+    async createWorkspace() {
+      const a = await this.$store.dispatch('workspace/createWorkspace', {
+        parentId: this.workspace.id
+      })
+    },
+
+    deleteWorkspace() {
+
     }
   }
 }
