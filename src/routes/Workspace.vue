@@ -4,6 +4,8 @@
 
 <script>
 export default {
-
+  created () {
+    this.$store.dispatch('workspace/createWorkspace')
+  }
 }
 </script>

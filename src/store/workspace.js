@@ -1,9 +1,11 @@
 import axios from 'axios'
+import router from '~/routes'
 
 export default {
   namespaced: true,
   state: () => ({
-    workspaces: []
+    workspaces: [],
+    currentWorkspace: {}
   }),
 
   mutations: {
@@ -25,8 +27,25 @@ export default {
 
     },
 
-    createWorkspace() {
+    async createWorkspace({ commit }) {
+      const currentWorkspace = await request({
+        method: 'POST',
+        data: {
+          title: ''
+        }
+      })
 
+      commit('assignState', {
+        currentWorkspace
+      })
+
+      // router === this.$router
+      router.push({
+        name: 'Workspace',
+        params: {
+          id: currentWorkspace.id
+        }
+      })
     },
 
     updateWorkspace() {
