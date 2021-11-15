@@ -2,7 +2,10 @@
   <nav
     ref="nav"
     :style="{ width: `${navWidth}px`}">
-    <div class="header"></div>
+    <div class="header">
+      <div class="user-profile"></div>
+      Lazysky Notion
+    </div>
     <ul>
       <WorkspaceItem
         v-for="workspace in workspaces"
@@ -80,6 +83,15 @@ nav {
     font-weight: 700;
     display: flex;
     align-items: center;
+
+    .user-profile {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      margin-right: 10px;
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKxpSByDTvhNNaCl15WJCpzE4N_HlzQMe-_InMlJd3dVs4aGMMrSE7B4U4D2yEFlWOSF8&usqp=CAU");
+      background-size: cover;
+    }
   }
 
   ul {
