@@ -63,8 +63,25 @@ export default {
 
     },
 
-    deleteWorkspace() {
+    async deleteWorkspace({ state, dispatch }, payload) {
+      const { id } = payload
 
+      await request({
+        method: 'DELETE',
+        workspaceId: id
+      })
+
+      // 프론트에서 해결해도 되는 걸 다시 요청하는 것이기 때문에 좋은 방법은 아니다. 다만 매우 편리하다.
+      await dispatch('readWorkspaces')
+
+      if (id === router.currentRoute.value.params.id) {
+        router.push({
+          name: 'Workspace',
+          params: {
+            id: state.workspaces[0].id
+          }
+        })
+      }
     }
   }
 }

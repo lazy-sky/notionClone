@@ -67,7 +67,9 @@ export default {
     },
 
     deleteWorkspace() {
-
+      this.$store.dispatch('workspace/deleteWorkspace', {
+        id: this.workspace.id
+      })
     }
   }
 }
@@ -129,7 +131,7 @@ li {
       align-items: center;
     }
   }
-  
+
   .no-children {
     color: rgba($color-font, .35);
     height: 30px;
