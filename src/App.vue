@@ -31,7 +31,6 @@ export default {
   .app__page {
     flex-grow: 1;
 
-    box-sizing: border-box;
     height: 100%;
   }
 }
