@@ -70,8 +70,19 @@ export default {
       })
     },
 
-    updateWorkspace() {
+    async updateWorkspace({ dispatch }, payload) {
+      const { id, title, content } = payload
 
+      await request({
+        method: 'PUT',
+        workspaceId: id,
+        data: {
+          title,
+          content
+        }
+      })
+
+      await dispatch('readWorkspaces')
     },
 
     async deleteWorkspace({ state, dispatch }, payload) {
