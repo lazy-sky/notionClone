@@ -23,6 +23,8 @@ export default {
 
   height: 100vh;
 
+  font-family: 'Noto Sans KR', sans-serif;
+  
   .app__page {
     flex-grow: 1;
 
