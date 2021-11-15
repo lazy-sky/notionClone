@@ -1,6 +1,7 @@
 <template>
   <li>
     <div
+      :style="{ paddingLeft: `${14 * depth}px` }"
       class="title"
       @click="$router.push({
         name: 'Workspace',
@@ -32,7 +33,7 @@
         v-for="ws in workspace.children"
         :key="ws.id"
         :workspace="ws"
-        style="color: red;" />
+        :depth="depth + 1" />
     </ul>
   </li>
 </template>
@@ -43,6 +44,11 @@ export default {
     workspace: {
       type: Object,
       default: () => ({})
+    },
+
+    depth: {
+      type: Number,
+      default: 1
     }
   },
 
