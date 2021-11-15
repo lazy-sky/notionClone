@@ -35,7 +35,7 @@ export default {
 
     },
 
-    async createWorkspace({ commit }, payload = {}) {
+    async createWorkspace({ commit, dispatch }, payload = {}) {
       const { parentId } = payload
 
       const currentWorkspace = await request({
@@ -45,6 +45,8 @@ export default {
           parentId
         }
       })
+
+      await dispatch('readWorkspaces')
 
       commit('assignState', {
         currentWorkspace

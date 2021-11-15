@@ -13,7 +13,7 @@
       <span
         :class="{acitve: showChildren}"
         class="material-icons"
-        @click="showChildren = !showChildren">
+        @click.stop="showChildren = !showChildren">
         play_arrow
       </span>
       <span class="text">
@@ -74,11 +74,17 @@ export default {
     }
   },
 
+  created() {
+    // TODO: 자동으로 열리는 기능 추가
+  },
+
   methods: {
     createWorkspace() {
       this.$store.dispatch('workspace/createWorkspace', {
         parentId: this.workspace.id
       })
+
+      this.showChildren = true
     },
 
     deleteWorkspace() {
