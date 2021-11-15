@@ -31,8 +31,17 @@ export default {
     },
 
     // Item
-    readWorkspace() {
+    async readWorkspace({ commit }, payload) {
+      const { id } = payload
 
+      const workspace = await request({
+        method: 'GET',
+        workspaceId: id
+      })
+
+      commit('assignState', {
+        currentWorkspace: workspace
+      })
     },
 
     async createWorkspace({ commit, dispatch }, payload = {}) {
