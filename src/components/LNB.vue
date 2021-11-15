@@ -1,5 +1,7 @@
 <template>
-  <nav style="width: 240px">
+  <nav
+    ref="nav"
+    :style="{ width: `${navWidth}px`}">
     <div class="header"></div>
     <ul>
       <WorkspaceItem
@@ -14,15 +16,26 @@
         <span class="material-icons">add</span> 새로운 페이지
       </div>
     </div>
+    <div
+      ref="resizeHandle"
+      class="resize-handle">
+    </div>
   </nav>
 </template>
 
 <script>
+import interact from 'interactjs'
 import WorkspaceItem from '~/components/WorkspaceItem'
 
 export default {
   components: {
     WorkspaceItem
+  },
+
+  data() {
+    return {
+      navWidth: 240
+    }
   },
 
   computed: {
@@ -33,6 +46,18 @@ export default {
   
   created () {
     this.$store.dispatch('workspace/readWorkspaces')
+  },
+
+  mounted () {
+    interact(this.$refs.nav)
+      .resizable({
+        edges: {
+          right: this.$refs.resizeHandle
+        }
+      })
+      .on('resizemove', event => {
+        this.navWidth = event.rect.width
+      })
   }
 }
 </script>
@@ -81,6 +106,20 @@ nav {
         margin-right: 4px;
         color: $color-icon;
       }
+    }
+  }
+
+  .resize-handle {
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: col-resize;
+    transition: .4s;
+    
+    &:hover {
+      background-color: $color-border;
     }
   }
 }
