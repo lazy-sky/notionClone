@@ -24,12 +24,14 @@ export default {
   height: 100vh;
 
   font-family: 'Noto Sans KR', sans-serif;
-  
+  font-size: 14px;
+  line-height: 1.4;
+  color: $color-font;
+
   .app__page {
     flex-grow: 1;
 
     box-sizing: border-box;
-    border: 4px solid red;
     height: 100%;
   }
 }
