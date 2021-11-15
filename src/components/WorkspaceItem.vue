@@ -10,7 +10,10 @@
           id: workspace.id
         }
       })">
-      <span class="material-icons">
+      <span
+        :class="{acitve: showChildren}"
+        class="material-icons"
+        @click="showChildren = !showChildren">
         play_arrow
       </span>
       <span class="text">
@@ -29,7 +32,13 @@
         </span>
       </div>
     </div>
-    <ul v-if="hasChildren">
+    <div
+      v-if="!hasChildren && showChildren"
+      :style="{ paddingLeft: `${14 * depth + 22}px`}"
+      class="no-children">
+      하위 페이지가 없습니다.
+    </div>
+    <ul v-if="hasChildren && showChildren">
       <WorkspaceItem
         v-for="ws in workspace.children"
         :key="ws.id"
@@ -50,6 +59,12 @@ export default {
     depth: {
       type: Number,
       default: 1
+    }
+  },
+
+  data() {
+    return {
+      showChildren: false
     }
   },
 
