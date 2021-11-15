@@ -18,7 +18,8 @@
     </div>
     <div
       ref="resizeHandle"
-      class="resize-handle">
+      class="resize-handle"
+      @dblclick="navWidth = 240">
     </div>
   </nav>
 </template>
