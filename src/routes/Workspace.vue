@@ -8,7 +8,13 @@
       @blur="onInput">
       {{ title }}
     </div>
-    <div class="content">
+    <div
+      ref="content"
+      class="content"
+      contenteditable
+      placeholder="내용을 입력하세요"
+      @blur="onInput"
+      v-html="content">
     </div>
   </div>
 </template>
@@ -18,6 +24,10 @@ export default {
   computed: {
     title() {
       return this.$store.state.workspace.currentWorkspace.title
+    },
+
+    content() {
+      return this.$store.state.workspace.currentWorkspace.content
     }
   },
 
@@ -38,13 +48,15 @@ export default {
   methods: {
     onInput() {
       const title = this.$refs.title.textContent
+      const content = this.$refs.content.innerHTML
 
-      if (title === this.title) return
+      if (title === this.title && content === this.content) return
 
+      // TODO: 내용이 모두 지워졌을 때 실제로 내용 비우기
       this.$store.dispatch('workspace/updateWorkspace', {
         id: this.$route.params.id,
         title,
-        content: ''
+        content
       })
     }
   }
@@ -52,9 +64,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-  padding: 100px 0 200px;
-
   .inner {
     max-width: 700px;
     margin: 0 auto;
@@ -81,5 +90,4 @@ section {
       }
     }
   }
-}
 </style>
