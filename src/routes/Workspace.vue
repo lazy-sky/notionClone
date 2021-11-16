@@ -10,6 +10,13 @@
         ref="inputPoster"
         type="file"
         @change="selectFile" />
+      <div
+        class="delete-poster"
+        @click.stop="deletePoster">
+        <span class="material-icons">
+          close
+        </span>
+      </div>
     </div>
     <div
       ref="title"
@@ -79,6 +86,13 @@ export default {
           })
         })
       }
+    },
+
+    deletePoster() {
+      this.$store.dispatch('workspace/updateWorkspace', {
+        id: this.$route.params.id,
+        poster: '-1'
+      })
     },
 
     onInput() {
