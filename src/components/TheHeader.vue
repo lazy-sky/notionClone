@@ -37,6 +37,7 @@ header {
   display: flex;
   align-items: center;
   padding: 0 20px;
+  flex-shrink: 0;
   .titles {
     flex-grow: 1;
     display: flex;
