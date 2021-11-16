@@ -52,7 +52,10 @@ export default {
 
       if (title === this.title && content === this.content) return
 
-      // TODO: 내용이 모두 지워졌을 때 실제로 내용 비우기
+      if (!this.$refs.content.textContent.trim()) {
+        this.$refs.content.innerHTML = ''
+      }
+
       this.$store.dispatch('workspace/updateWorkspace', {
         id: this.$route.params.id,
         title,
