@@ -48,8 +48,18 @@ export default {
     }
   },
   
-  created () {
-    this.$store.dispatch('workspace/readWorkspaces')
+  async created () {
+    await this.$store.dispatch('workspace/readWorkspaces')
+    
+    // Redirect
+    if (this.$route.fullPath === '/') {
+      this.$router.push({
+        name: 'Workspace',
+        params: {
+          id: this.$store.state.workspace.workspaces[0].id
+        }
+      })
+    }
   },
 
   mounted () {
