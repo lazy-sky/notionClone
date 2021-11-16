@@ -1,21 +1,69 @@
 <template>
   <header>
-    <RouterLink to="/">
-      Home.
-    </RouterLink>
-    <RouterLink to="/about">
-      About.
-    </RouterLink>
+    <div class="titles">
+      <template
+        v-for="({ id, title }, index) in $store.state.workspace.currentWorkspacePath"
+        :key="id">
+        <div
+          v-if="index > 0"
+          class="division">
+          /
+        </div>
+        <button
+          class="title"
+          type="button"
+          @click="$router.push({
+            name: 'Workspace',
+            params: {
+              id
+            }
+          })">
+          {{ title || '제목 없음' }}
+        </button>
+      </template>
+    </div>
+    <div class="actions"></div>
   </header>
 </template>
 
 <style lang="scss" scoped>
 header {
-  padding: 20px 20px;
-  border-bottom: 1px solid $color-primary;
-  a {
-    margin-right: 10px;
-    line-height: 1;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  .titles {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    .division {
+      margin: 0 2px;
+      color: rgba($color-font, .4);
+    }
+    .title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+  .actions {
+    display: flex;
+    flex-shrink: 0;
+  }
+}
+button {
+  color: $color-font;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-background;
   }
 }
 </style>

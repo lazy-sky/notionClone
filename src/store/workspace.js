@@ -5,7 +5,8 @@ export default {
   namespaced: true,
   state: () => ({
     workspaces: [],
-    currentWorkspace: {}
+    currentWorkspace: {},
+    currentWorkspacePath: []
   }),
 
   mutations: {
@@ -105,6 +106,26 @@ export default {
           }
         })
       }
+    },
+
+    findWorkspacePath({ state, commit }) {
+      const currentWorkspaceId = router.currentRoute.value.params.id
+
+      function _find(workspace, parents) {
+        if (workspace.id === currentWorkspaceId) {
+          commit('assignState', {
+            currentWorkspacePath: [...parents, workspace]
+          })
+
+          console.log(state.currentWorkspacePath)
+        }
+
+        if (workspace.children) {
+          workspace.children.forEach(ws => _find(ws, [...parents, workspace]))
+        }
+      }
+
+      state.workspaces.forEach(workspace => _find(workspace, []))
     }
   }
 }
