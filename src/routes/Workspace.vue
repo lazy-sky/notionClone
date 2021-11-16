@@ -4,6 +4,7 @@
       class="poster"
       @click="triggerInput">
       <img
+        v-if="poster"
         :src="poster"
         alt="poster" />
       <input
@@ -11,6 +12,7 @@
         type="file"
         @change="selectFile" />
       <div
+        v-if="poster"
         class="delete-poster"
         @click.stop="deletePoster">
         <span class="material-icons">
@@ -80,15 +82,34 @@ export default {
         const reader = new FileReader()
         reader.readAsDataURL(file)
         reader.addEventListener('load', e => {
+          const poster = e.target.result
+
+          // 업로드
           this.$store.dispatch('workspace/updateWorkspace', {
             id: this.$route.params.id,
-            poster: e.target.result
+            poster
+          })
+
+          // 갱신
+          this.$store.commit('workspace/assginState', {
+            currentWorkspace: {
+              ...this.$store.state.workspace.currentWorkspace,
+              poster
+            }
           })
         })
       }
     },
 
     deletePoster() {
+      // 갱신
+      this.$store.commit('workspace/assginState', {
+        currentWorkspace: {
+          ...this.$store.state.workspace.currentWorkspace,
+          poster: null
+        }
+      })
+
       this.$store.dispatch('workspace/updateWorkspace', {
         id: this.$route.params.id,
         poster: '-1'
