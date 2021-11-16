@@ -1,42 +1,44 @@
 <template>
-  <div class="inner">
-    <div
-      class="poster"
-      @click="triggerInput">
-      <img
-        v-if="poster"
-        :src="poster"
-        alt="poster" />
-      <input
-        ref="inputPoster"
-        type="file"
-        @change="selectFile" />
+  <section :key="$route.params.id">
+    <div class="inner">
       <div
-        v-if="poster"
-        class="delete-poster"
-        @click.stop="deletePoster">
-        <span class="material-icons">
-          close
-        </span>
+        class="poster"
+        @click="triggerInput">
+        <img
+          v-if="poster"
+          :src="poster"
+          alt="poster" />
+        <input
+          ref="inputPoster"
+          type="file"
+          @change="selectFile" />
+        <div
+          v-if="poster"
+          class="delete-poster"
+          @click.stop="deletePoster">
+          <span class="material-icons">
+            close
+          </span>
+        </div>
+      </div>
+      <div
+        ref="title"
+        placeholder="제목 없음"
+        contenteditable
+        class="title"
+        @blur="onInput">
+        {{ title }}
+      </div>
+      <div
+        ref="content"
+        class="content"
+        contenteditable
+        placeholder="내용을 입력하세요"
+        @blur="onInput"
+        v-html="content">
       </div>
     </div>
-    <div
-      ref="title"
-      placeholder="제목 없음"
-      contenteditable
-      class="title"
-      @blur="onInput">
-      {{ title }}
-    </div>
-    <div
-      ref="content"
-      class="content"
-      contenteditable
-      placeholder="내용을 입력하세요"
-      @blur="onInput"
-      v-html="content">
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -137,6 +139,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+section {
+  padding: 100px 0 200px;
+
   .inner {
     max-width: 700px;
     margin: 0 auto;
@@ -190,8 +195,9 @@ export default {
         span {
           font-size: 20px;
         }
+      }
+    }
   }
-}
 
     [contenteditable] {
       outline: none;
@@ -213,5 +219,5 @@ export default {
         color: rgba($color-font, .3);
       }
     }
-  }
+}
 </style>
