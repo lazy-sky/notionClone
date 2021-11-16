@@ -22,7 +22,12 @@
         </button>
       </template>
     </div>
-    <div class="actions"></div>
+    <div class="actions">
+      <button>공유</button>
+      <button>업데이트</button>
+      <button>즐겨찾기</button>
+      <button>기타</button>
+    </div>
   </header>
 </template>
 
