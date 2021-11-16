@@ -71,14 +71,15 @@ export default {
     },
 
     async updateWorkspace({ dispatch }, payload) {
-      const { id, title, content } = payload
+      const { id, title, content, poster } = payload
 
       await request({
         method: 'PUT',
         workspaceId: id,
         data: {
           title,
-          content
+          content,
+          poster
         }
       })
 
