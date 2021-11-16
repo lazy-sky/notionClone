@@ -3,7 +3,9 @@
     <LNB />
     <div class="app__page">
       <TheHeader />
-      <RouterView />
+      <div class="page__container">
+        <RouterView />
+      </div>
     </div>
   </div>
 </template>
@@ -33,8 +35,14 @@ export default {
 
   .app__page {
     flex-grow: 1;
-
+    display: flex;
+    flex-direction: column;
     height: 100%;
+  
+    .page__container {
+      flex-grow: 1;
+      overflow-y: auto;
+    }
   }
 }
 </style>

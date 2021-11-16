@@ -19,7 +19,7 @@ export default {
 
   actions: {
     // List
-    async readWorkspaces({ commit }) {
+    async readWorkspaces({ commit, dispatch }) {
       const workspaces = await request({
         method: 'GET'
       })
@@ -27,6 +27,12 @@ export default {
       commit('assignState', {
         workspaces
       })
+
+      await dispatch('findWorkspacePath')
+
+      if (!workspaces.length) {
+        dispatch('createWorkspace')
+      }
 
       console.log(workspaces)
     },

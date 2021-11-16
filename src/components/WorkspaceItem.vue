@@ -75,7 +75,9 @@ export default {
   },
 
   created() {
-    // TODO: 자동으로 열리는 기능 추가
+    this.showChildren = 
+      this.$store.state.workspace.currentWorkspacePath
+        .some(workspace => workspace.id === this.workspace.id)
   },
 
   methods: {
