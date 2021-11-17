@@ -9,7 +9,8 @@
     "build": "webpack --mode production",
     "babel": "babel src/main.js --out-dir dist",
     "test:e2e": "cypress open",
-    "test:e2e:headeless": "cypress run"
+    "test:e2e:headeless": "cypress run",
+    "test:unit": "jest"
   },
   "keywords": [],
   "author": "",
