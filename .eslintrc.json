@@ -1,8 +1,12 @@
 {
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "cypress/globals": true,
   },
+  "plugins": [
+    "cypress"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:vue/vue3-recommended"
